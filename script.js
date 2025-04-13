@@ -1,6 +1,12 @@
 function getPlayerChoice() {
-    const playerChoice = prompt("Enter your choice", "rock");
-    return playerChoice.toLowerCase();
+    const playerChoice = prompt("Enter your choice", "rock").toLowerCase();
+    if (playerChoice != null && playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissor") {
+        console.log("Enter either: 'rock', 'paper' or 'scissor'");
+        getPlayerChoice();
+    } else {
+        return playerChoice;
+    }
+    
 };
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random() * 3)
