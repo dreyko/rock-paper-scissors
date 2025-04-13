@@ -12,7 +12,7 @@ function getComputerChoice() {
             return "paper"
             break;
         case 2:
-            return "scissors"
+            return "scissor"
             break;
     };
 };
@@ -32,20 +32,13 @@ function gameTie(playerChoice) {
 };
 
 function playRound(playerChoice, computerChoice) {
-    if (playerChoice == "rock" && computerChoice == "scissors") {
-        playerWins(playerChoice, computerChoice);
-    } else if (playerChoice == "rock" && computerChoice == "paper") {
-        computerWins(playerChoice, computerChoice);
-    } else if (playerChoice == "paper" && computerChoice == "scissors") {
-        computerWins(playerChoice, computerChoice);
-    } else if (playerChoice == "paper" && computerChoice == "rock") {
-        playerWins(playerChoice, computerChoice);
-    } else if (playerChoice == "scissors" && computerChoice == "paper") {
-        playerWins(playerChoice, computerChoice);
-    } else if (playerChoice == "scissors" && computerChoice == "rock") {
-        computerWins(playerChoice, computerChoice);
-    } else {
+    console.clear();
+    if (playerChoice === computerChoice) {
         gameTie(playerChoice);
+    } else if (playerChoice === "rock" && computerChoice === "scissor" || playerChoice === "paper" && computerChoice === "rock" || playerChoice === "scissor" && computerChoice === "paper") {
+        playerWins(playerChoice, computerChoice);   
+    } else {
+        computerWins(playerChoice, computerChoice);
     }
     console.log(`Score: player ${playerScore}, computer ${computerScore}`)
 };
