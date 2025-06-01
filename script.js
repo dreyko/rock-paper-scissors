@@ -8,6 +8,10 @@ function getPlayerChoice() {
     }
     
 };
+
+// Math.random get random number between 0 and 1
+// Multiplies the random number by 3 and then .floor rounds it down to nearest whole number 
+
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random() * 3)
     switch(computerChoice) {
@@ -23,6 +27,7 @@ function getComputerChoice() {
     };
 };
 
+
 function playerWins(playerChoice, computerChoice) {
     console.log(`You win! ${playerChoice.charAt(0).toUpperCase()+playerChoice.slice(1)} beats ${computerChoice}`);
     playerScore += 1;
@@ -37,6 +42,11 @@ function gameTie(playerChoice) {
     console.log(`The round is a tie! Both chose ${playerChoice}`);
 };
 
+// Function get the players choice and a random computer choice and increases the winners score
+// if player === computer > its a tie
+// else if any of the 3 player win conditions > increase playerScore
+// else increase computerScore
+
 function playRound(playerChoice, computerChoice) {
     console.clear();
     if (playerChoice === computerChoice) {
@@ -49,15 +59,13 @@ function playRound(playerChoice, computerChoice) {
     console.log(`Score: player ${playerScore}, computer ${computerScore}`)
 };
 
-function playGame() {
-    while (playerScore < 3 && computerScore < 3) {
-        const playerSelection = getPlayerChoice();
-        const computerSelection = getComputerChoice();
-        playRound(playerSelection, computerSelection);
-    };
-};
+// function playGame() {
+//     while (playerScore < 3 && computerScore < 3) {
+//         const playerSelection = getPlayerChoice();
+//         const computerSelection = getComputerChoice();
+//         playRound(playerSelection, computerSelection);
+//     };
+// };
 
 let playerScore = 0;
 let computerScore = 0;
-
-playGame();
