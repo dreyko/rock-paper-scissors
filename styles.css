@@ -1,12 +1,13 @@
-body, .buttons {
+body, #buttons, .results {
     display: flex;
     justify-content: center;
 }
 
-.container {
-    flex-direction: column;
+.results {
+    margin-top: 1rem;
 }
 
-.buttons {
+#buttons {
     gap: 1rem;
 }
+

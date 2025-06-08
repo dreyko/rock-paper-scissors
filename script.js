@@ -1,17 +1,3 @@
-function getPlayerChoice() {
-    const playerChoice = prompt("Enter your choice", "rock").toLowerCase();
-    if (playerChoice != null && playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissor") {
-        console.log("Enter either: 'rock', 'paper' or 'scissor'");
-        getPlayerChoice();
-    } else {
-        return playerChoice;
-    }
-    
-};
-
-// Math.random get random number between 0 and 1
-// Multiplies the random number by 3 and then .floor rounds it down to nearest whole number 
-
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random() * 3)
     switch(computerChoice) {
@@ -22,50 +8,61 @@ function getComputerChoice() {
             return "paper"
             break;
         case 2:
-            return "scissor"
+            return "scissors"
             break;
     };
 };
 
-
 function playerWins(playerChoice, computerChoice) {
-    console.log(`You win! ${playerChoice.charAt(0).toUpperCase()+playerChoice.slice(1)} beats ${computerChoice}`);
     playerScore += 1;
+    if(playerScore < 5) {
+        results.textContent = `Player wins! ${playerChoice.charAt(0).toUpperCase()+playerChoice.slice(1)} beats ${computerChoice}`;
+        score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+    } else {
+        results.textContent = `Player wins best of 5!`;
+        document.getElementById("buttons").replaceChildren();
+    }
 };
 
 function computerWins(playerChoice, computerChoice) {
-    console.log(`Computer wins! ${computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1)} beats ${playerChoice}`);
     computerScore += 1;
+    if(computerScore < 5) {
+        results.textContent = `Computer wins! ${computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1)} beats ${playerChoice}`;
+        score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+    } else {
+        results.textContent = `Player wins best of 5!`;
+        document.getElementById("buttons").replaceChildren();
+    }
 };
 
 function gameTie(playerChoice) {
-    console.log(`The round is a tie! Both chose ${playerChoice}`);
+    results.textContent = `The round is a tie! Both chose ${playerChoice}`;
+    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
 };
 
-// Function get the players choice and a random computer choice and increases the winners score
-// if player === computer > its a tie
-// else if any of the 3 player win conditions > increase playerScore
-// else increase computerScore
-
 function playRound(playerChoice, computerChoice) {
-    console.clear();
     if (playerChoice === computerChoice) {
         gameTie(playerChoice);
-    } else if (playerChoice === "rock" && computerChoice === "scissor" || playerChoice === "paper" && computerChoice === "rock" || playerChoice === "scissor" && computerChoice === "paper") {
+    } else if (playerChoice === "rock" && computerChoice === "scissors" || playerChoice === "paper" && computerChoice === "rock" || playerChoice === "scissors" && computerChoice === "paper") {
         playerWins(playerChoice, computerChoice);   
     } else {
         computerWins(playerChoice, computerChoice);
     }
-    console.log(`Score: player ${playerScore}, computer ${computerScore}`)
 };
-
-// function playGame() {
-//     while (playerScore < 3 && computerScore < 3) {
-//         const playerSelection = getPlayerChoice();
-//         const computerSelection = getComputerChoice();
-//         playRound(playerSelection, computerSelection);
-//     };
-// };
 
 let playerScore = 0;
 let computerScore = 0;
+
+document.getElementById("btn-rock").addEventListener("click", function () {playRound("rock", getComputerChoice())});
+document.getElementById("btn-paper").addEventListener("click", () => playRound("paper", getComputerChoice()));
+document.getElementById("btn-scissors").addEventListener("click", () => playRound("scissors", getComputerChoice()));
+
+const container = document.querySelector(".container");
+
+const results = document.createElement("div");
+results.classList.add("results")
+const score = document.createElement("div");
+score.classList.add("results")
+
+container.appendChild(results);
+container.appendChild(score);
